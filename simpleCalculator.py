@@ -17,7 +17,7 @@ e2.grid(row=0, column=4, columnspan=2, sticky='ew')
 #Create Labels
 label1 = Label(root, text='Input:')
 label2 = Label(root, text='Ans:')
-label3 = Label(root, text='Created by: Casey Moore  \nCaseymoore19@gmail.com') 
+label3 = Label(root, text='Created by: Casey Moore  \nEMAIL HERE') 
 label1.grid(row=0, column=0)
 label2.grid(row=0, column=3, columnspan=1)
 label3.grid(row=3, column=3, sticky="EWN", columnspan=2)
