@@ -8,13 +8,13 @@ root.title("Simple Calculator")
 root.iconbitmap(r'C:\Users\casey\Documents\Python Scripts\calculator\calculator.ico')
 root.geometry('500x440')
 
-#frame1 = Frame(master=root, bg='#FFFFFF')
-#frame1.grid()
+#Create entry boxes
 e1 = Entry(root, width=20, bg='#000000', fg='#FFFFFF')
 e2 = Entry(root, width=20, bg='#000000', fg='#FFFFFF')
 e1.grid(row=0, column=1, columnspan=2, sticky='ew')
 e2.grid(row=0, column=4, columnspan=2, sticky='ew')
 
+#Create Labels
 label1 = Label(root, text='Input:')
 label2 = Label(root, text='Ans:')
 label3 = Label(root, text='Created by: Casey Moore  \nCaseymoore19@gmail.com') 
@@ -22,7 +22,7 @@ label1.grid(row=0, column=0)
 label2.grid(row=0, column=3, columnspan=1)
 label3.grid(row=3, column=3, sticky="EWN", columnspan=2)
 
-
+#Class for creating buttons, completely unneccesary but I wanted to practice with classes 
 class Buttons():
     def __init__(self, root, text, func, padx, pady, args):
         self.root = root
@@ -41,16 +41,20 @@ class Buttons():
         self.sticky = sticky
         self.button = Button(self.root, text=self.text, padx=self.padx, pady=self.pady, command=lambda: self.func(self.args))
         self.button.grid(row =self.r, column = self.col, columnspan= self.colspan, sticky=self.sticky)
-
+        
+#Everytime 0-9 button is clicked, store and update the string in the input box. 
 def button_click(num):
     global button_number
     e1.insert('end', num)
     button_number += str(num)
     return button_number
 
+#Input 'ANS' into box when ANS button is clicked
 def button_ans(args):
     e1.insert(END, args)
 
+#This function is called when any operator (except factorial) is clicked. It evaluates everything inside
+#the input box and updates accordingly
 def button_operator(args):
     global ans
     global expression
@@ -59,18 +63,24 @@ def button_operator(args):
     global trigIdent
 
     try:
+        #patterns that will be used to search for in input box
         matchObj = re.compile('[cst]..[(]')
         matchObj2 = re.compile('ANS')
         matchObj3 = re.compile('[-+//*^]ANS')
         matchObj4 = re.compile('[0-9]+[-+//*^][cst]..[(]')
+        
+        #first math operator has been clicked and no trig functions either
         if expression == '' and not re.match(matchObj, e1.get()):
-            if args[0] == operator.eq:
+            
+            #If you click '=' after inputting numbers with no operator, just output that number
+            if args[0] == operator.eq: 
                 ans = float(button_number)
                 e1.delete(0, END)
                 e2.delete(0, END)
                 button_number = ''
                 e2.insert(0, ans)
-
+                
+            #ANS followed by some operator
             elif re.match(matchObj2, e1.get()):
                 numList.append(ans)
                 e1.insert(END, args[1])
@@ -82,7 +92,8 @@ def button_operator(args):
                 expression = args[0]
 
         else:
-
+            #any operator other than '=' has been clicked. A Bunch of if statements to check various cases and update all
+            #variables accordingly
             if args[0] != operator.eq:
 
                 if re.search(matchObj, e1.get()):
@@ -265,6 +276,7 @@ def button_clear(args):
     ans = 0
     trigIdent = None
 
+#evaluate the factorial of a number clicked
 def button_fact(operator):
     global button_number
     global ans
@@ -284,7 +296,8 @@ def button_fact(operator):
     except ValueError:
         e1.delete(0, END)
         e1.insert(0, "ValueError: Clear Screen")
-
+        
+#turn a number into a negative, works with long expressions
 def button_neg(operator):
     global button_number
     numLen = len(button_number)
@@ -292,7 +305,8 @@ def button_neg(operator):
     count = len(e1.get())
     e1.delete(count-numLen,count)
     e1.insert(count-numLen, button_number)
-
+    
+#My global variables to keep track of everything 
 ans = 0
 numList = []
 expression = ''
