@@ -13,5 +13,5 @@ A fairly simple calculator that is able to use simple mathematical operations an
 
 
 I tried to incorporate as much flexibility within the input while keeping it simple at the same time. 
-> **Please note:** This is my first simple python project I have created that involves a GUI. I have made simple scripts in the past that use simulation approaches to solve certain problems *(ie: problems relating to physics while I was still in my undergrad)*. I am still very new to python and the approaches in this script are probably terrible but I tried to use several approaches based on what I have learned so far: For Loops, Classes, Functions and Methods etc. Creating a Button class to create Buttons is extremely redundant but I wanted to practice my knowledge with classes as well.
+> **Please note:** This is my first simple python project I have created that involves a GUI. I have made simple scripts in the past that use simulation approaches to solve certain problems *(ie: problems relating to physics while I was still in my undergrad)*. I am still very new to python and the approaches in this script are probably terrible but I tried to use several approaches based on what I have learned so far: For Loops, Classes, Functions and Methods etc.
 
